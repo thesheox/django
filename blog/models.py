@@ -12,6 +12,11 @@ class Post(models.Model):
     created_date=models.DateTimeField(auto_now_add=True)
     updated_date=models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ['-created_date']
+        verbose_name = "Blog Post"
+        verbose_name_plural = "Blog Posts"
+    
     def __str__(self):
         return " {} - {}".format(self.title,self.id-1)
     

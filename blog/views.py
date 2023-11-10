@@ -6,5 +6,6 @@ def blog_view(request):
     
 
 def blog_single (request):
-    return render(request,"blog/blog-single.html")
+
+    return render(request,"blog/blog-single.html",{'title':'my first blog post about django','content':'django is very sweet for me and im so excited to build my first app with it','author':'shayan saeidian'})
     

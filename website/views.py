@@ -9,3 +9,6 @@ def about_view(request):
 
 def contact_view(request):
     return render(request,"websites/contact.html")
+
+def test_view(request):
+    return render(request,"websites/test.html",{'name':'shayan','lastname':'saeidian'})

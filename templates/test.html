@@ -9,8 +9,25 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1> hello mr {{name}} {{lastname}} </h1>
+        {% comment %} {{posts}}
+
+        {% for post in posts %}
+
+
+        {% if  post.status == 0 %}
+        <p>post not published yet</p>
+
+        {% else %}
+        <h1>{{post.title}}</h1>
+        <p>{{post.content}}</p>
+        <small>{{post.published_date}}</small>
+        {%endif%}
+
+        {%endfor%} {% endcomment %}
+
+        <p>{{post.title}}</p>
         
+
         <script src="" async defer></script>
     </body>
 </html>

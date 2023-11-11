@@ -1,11 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
+from blog.models import Post
 
 def blog_view(request):
-     return render(request,"blog/blog-home.html")
+     posts=Post.objects.filter(status=1)
+     context={'posts': posts}
+     return render(request,"blog/blog-home.html",context)
     
 
-def blog_single (request):
-
-    return render(request,"blog/blog-single.html",{'title':'my first blog post about django','content':'django is very sweet for me and im so excited to build my first app with it','author':'shayan saeidian'})
-    
+def blog_single (request,pid):
+    post=get_object_or_404(Post,pk=pid)
+    context={'post' : post}
+    return render(request,"blog/blog-single.html",context)
+def test(request,pid):
+     posts=Post.objects.filter(status=1)
+     post=get_object_or_404(posts,pk=pid)
+     context={'post' : post}
+     return render(request,'test.html',context)

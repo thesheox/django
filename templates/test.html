@@ -10,30 +10,11 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        {% comment %} {{posts}}
-
-        {% for post in posts %}
-
-
-        {% if  post.status == 0 %}
-        <p>post not published yet</p>
-
-        {% else %}
-        <h1>{{post.title}}</h1>
-        <p>{{post.content}}</p>
-        <small>{{post.published_date}}</small>
-        {%endif%}
-
-        {%endfor%} {% endcomment %}
-
-        {% comment %} <p>{% posts as totalposts %}</p>
-        {% for post in totalposts %}
-            <p>{{post.title}}</p>
-        {% endfor %} {% endcomment %}
-
-        {% popularposts %}
-        
-
-        <script src="" async defer></script>
+        <form "{% url 'website:test' %}" method="post">
+            {% csrf_token %}
+            
+            {{form.as_p}}
+            <button type="submit">submit</button>
+        </form >
     </body>
 </html>

@@ -1,7 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-from blog.models import Post
+from blog.models import Post,Comment
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from blog.forms import Comment_Form
+from django.contrib import messages
 
 def blog_view(request,**kwargs):
      posts=Post.objects.filter(status=1)
@@ -31,9 +33,20 @@ def blog_view(request,**kwargs):
     
 
 def blog_single (request,pid):
-    post=get_object_or_404(Post,pk=pid)
-    context={'post' : post}
-    return render(request,"blog/blog-single.html",context)
+     if request.method == 'POST':
+          form=Comment_Form(request.POST)
+          if form.is_valid():
+              form.save()
+              messages.add_message(request,messages.SUCCESS,"your comment submitted successfully") 
+          else:
+               messages.add_message(request,messages.ERROR,"your comment didnt submitted") 
+    
+     posts=Post.objects.filter(status=1)
+     post=get_object_or_404(posts,pk=pid)
+     comments=Comment.objects.filter(post=post.id,approved=True)
+     form=Comment_Form()
+     context={'post' : post,'comments':comments,'form':form}
+     return render(request,"blog/blog-single.html",context)
 def test(request):
 
      return render(request,'test.html')

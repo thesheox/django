@@ -42,9 +42,10 @@
                         <ul>
                             {%if request.user.is_authenticated %}
                             <li><a href="#">Logged in as {{request.user.username}}</a></li>
-                            {%else%}
+                            <li><a href="{% url 'accounts:logout' %}">logout</a></li>
+                            {% else %}
                             <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                            <li><a href="#">Sign Up</a></li>
+                            <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
                             {% endif %}
                         </ul>
                     </div>
